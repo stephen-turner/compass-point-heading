@@ -11,39 +11,57 @@ class CompassPointHeadingView extends Ui.SimpleDataField {
     function compute(info) {
         var heading = info.currentHeading;
         if (heading != null) {
-            var deg = radToDeg(heading);
-            return degToCompassPoint(deg);
+            var pts = radToPoints(heading);
+            return pointsToCompassPoint(pts);
         }
         return "";
     }
 
-    function radToDeg(rad) {
-		var deg = rad * 180 / Math.PI;
-		if (deg < 0) {
-		    deg += 360.0;
+    function radToPoints(rad) {  // Convert to 16ths of a circle, rounded to nearest
+		var pts = rad * 8 / Math.PI;
+        pts += 0.5;
+		if (pts < 0) {
+		    pts += 16.0;
 		}
-		return deg;
+		return pts.toNumber();
 	}
 
-    function degToCompassPoint(deg) {
-        if (deg <= 22.5) {
-            return "N";
-        } else if (deg < 67.5) {
-            return "NE";
-        } else if (deg <= 112.5) {
-            return "E";
-        } else if (deg < 157.5) {
-            return "SE";
-        } else if (deg <= 202.5) {
-            return "S";
-        } else if (deg < 247.5) {
-            return "SW";
-        } else if (deg <= 292.5) {
-            return "W";
-        } else if (deg < 337.5) {
-            return "NW";
-        } else {
-            return "N";
+    function pointsToCompassPoint(pts) {
+        switch (pts) {
+            case 0:
+                return "N";
+            case 1:
+                return "NNE";
+            case 2:
+                return "NE";
+            case 3:
+                return "ENE";
+            case 4:
+                return "E";
+            case 5:
+                return "ESE";
+            case 6:
+                return "SE";
+            case 7:
+                return "SSE";
+            case 8:
+                return "S";
+            case 9:
+                return "SSW";
+            case 10:
+                return "SW";
+            case 11:
+                return "WSW";
+            case 12:
+                return "W";
+            case 13:
+                return "WNW";
+            case 14:
+                return "NW";
+            case 15:
+                return "NNW";
+            default:
+                return "ERR";
         }
     }
 }

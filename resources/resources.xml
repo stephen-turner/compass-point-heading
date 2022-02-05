@@ -1,5 +1,5 @@
 <resources>
-    <string id="AppName">CompassPointHeading</string>
+    <string id="AppName">GPSHeading</string>
 
     <bitmap id="LauncherIcon" filename="images/launcher_icon.png" />
 </resources>
