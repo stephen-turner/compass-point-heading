@@ -5,11 +5,11 @@ class CompassPointHeadingView extends Ui.SimpleDataField {
 
     function initialize() {
     	Ui.SimpleDataField.initialize();
-        label = "Heading";
+        label = "GPS Heading";
     }
 
     function compute(info) {
-        var heading = info.currentHeading;
+        var heading = info.track;
         if (heading != null) {
             var pts = radToPoints(heading);
             return pointsToCompassPoint(pts);
